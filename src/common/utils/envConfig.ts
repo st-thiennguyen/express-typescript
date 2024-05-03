@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { cleanEnv, str, testOnly } from 'envalid';
+import { cleanEnv, host, port, str, testOnly } from 'envalid';
 dotenv.config();
 
 export const env = cleanEnv(process.env, {
@@ -8,6 +8,8 @@ export const env = cleanEnv(process.env, {
     choices: ['development', 'production', 'test'],
   }),
   CORS_ORIGIN: str({
-    devDefault: testOnly('http://localhost:3000'),
+    devDefault: testOnly('http://localhost:8080'),
   }),
+  PORT: port({ devDefault: testOnly(8080) }),
+  HOST: host({ devDefault: testOnly('localhost') }),
 });
